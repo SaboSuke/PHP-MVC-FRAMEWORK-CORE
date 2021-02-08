@@ -1,0 +1,10 @@
+{
+    "name": "sabosuke/sabophp-mvc-core",
+    "authors": [
+        {
+            "name": "SaboSuke",
+            "email": "abedissam95@gmail.com"
+        }
+    ],
+    "require": {}
+}
