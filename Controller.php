@@ -1,14 +1,14 @@
 <?php
 /** User: Sabo */
 
-namespace app\core;
-use app\core\middlewares\BaseMiddleware;
+namespace sabosuke\sabophp_mvc_core;
+use sabosuke\sabophp_mvc_core\middlewares\BaseMiddleware;
 
 /** 
  * Class Controller
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core
+ * @package sabosuke\sabophp_mvc_core
 */
 
 class Controller{
@@ -16,7 +16,7 @@ class Controller{
     public string $layout = 'main';
     public string $action = '';
     /**
-     * @var \app\core\middlewares\BaseMiddleware[]
+     * @var \sabosuke\sabophp_mvc_core\middlewares\BaseMiddleware[]
      */
     protected array $middlewares = [];
 

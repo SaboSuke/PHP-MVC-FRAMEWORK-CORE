@@ -1,13 +1,13 @@
 <?php
 /** User: Sabo */
 
-namespace app\core\middlewares;
+namespace sabosuke\sabophp_mvc_core\middlewares;
 
 /** 
  * Class BaseMiddleware
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core\middlewares
+ * @package sabosuke\sabophp_mvc_core\middlewares
 */
 
 abstract class BaseMiddleware{

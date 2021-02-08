@@ -1,20 +1,20 @@
 <?php
 /** User: Sabo */
 
-namespace app\core;
-use app\core\Router;
-use app\core\Request;
-use app\core\Response;
-use app\core\Controller;
-use app\core\db\DbModel;
-use app\core\db\Database;
-use app\core\View;
+namespace sabosuke\sabophp_mvc_core;
+use sabosuke\sabophp_mvc_core\Router;
+use sabosuke\sabophp_mvc_core\Request;
+use sabosuke\sabophp_mvc_core\Response;
+use sabosuke\sabophp_mvc_core\Controller;
+use sabosuke\sabophp_mvc_core\db\DbModel;
+use sabosuke\sabophp_mvc_core\db\Database;
+use sabosuke\sabophp_mvc_core\View;
 
 /** 
  * Class Application
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core
+ * @package sabosuke\sabophp_mvc_core
 */
 
 class Application{
@@ -71,14 +71,14 @@ class Application{
     }
 
     /**
-     * @param \app\core\Controller $controller
+     * @param \sabosuke\sabophp_mvc_core\Controller $controller
      */
     public function getController(){
         return $this->controller;
     }
     
     /**
-     * @param \app\core\Controller $controller
+     * @param \sabosuke\sabophp_mvc_core\Controller $controller
      */
     public function setController(Controller $controller){
         $this->controller = $controller;

@@ -1,14 +1,14 @@
 <?php
 /** User: Sabo */
 
-namespace app\core\db;
-use app\core\Application;
+namespace sabosuke\sabophp_mvc_core\db;
+use sabosuke\sabophp_mvc_core\Application;
 
 /** 
  * Class Database
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core\db
+ * @package sabosuke\sabophp_mvc_core\db
 */
 
 class Database{

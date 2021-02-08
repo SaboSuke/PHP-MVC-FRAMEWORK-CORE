@@ -1,14 +1,14 @@
 <?php
 /** User: Sabo */
 
-namespace app\core;
-use app\core\db\DbModel;
+namespace sabosuke\sabophp_mvc_core;
+use sabosuke\sabophp_mvc_core\db\DbModel;
 
 /** 
  * Class UserModel
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core
+ * @package sabosuke\sabophp_mvc_core
 */
 
 abstract class UserModel extends DbModel{

@@ -1,16 +1,16 @@
 <?php
 /** User: Sabo */
 
-namespace app\core\middlewares;
+namespace sabosuke\sabophp_mvc_core\middlewares;
 
-use app\core\Application;
-use app\core\exception\ForbiddenException;
+use sabosuke\sabophp_mvc_core\Application;
+use sabosuke\sabophp_mvc_core\exception\ForbiddenException;
 
 /** 
  * Class AuthMiddleware
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core\middlewares
+ * @package sabosuke\sabophp_mvc_core\middlewares
 */
 
 class AuthMiddleware extends BaseMiddleware{

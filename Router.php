@@ -1,16 +1,16 @@
 <?php
 /** User: Sabo */
 
-namespace app\core;
-use app\core\Request;
-use app\core\Response;
-use app\core\exception\NotFoundException;
+namespace sabosuke\sabophp_mvc_core;
+use sabosuke\sabophp_mvc_core\Request;
+use sabosuke\sabophp_mvc_core\Response;
+use sabosuke\sabophp_mvc_core\exception\NotFoundException;
 
 /** 
  * Class Router
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core
+ * @package sabosuke\sabophp_mvc_core
 */
 
 class Router{
@@ -53,7 +53,7 @@ class Router{
 
         if(is_array($callback)){
             //creating an instance of the class $callback[0] = SiteController::class
-            /** @var \app\core\Controller $controller */
+            /** @var \sabosuke\sabophp_mvc_core\Controller $controller */
             $controller = new $callback[0](); //controller name
             Application::$app->controller = $controller;
             $controller->action = $callback[1];

@@ -1,14 +1,14 @@
 <?php
 /** User: Sabo */
 
-namespace app\core\form;
-use app\core\Model;
+namespace sabosuke\sabophp_mvc_core\form;
+use sabosuke\sabophp_mvc_core\Model;
 
 /** 
  * Class BaseField
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core\form
+ * @package sabosuke\sabophp_mvc_core\form
 */
 
 abstract class BaseField{
@@ -21,7 +21,7 @@ abstract class BaseField{
     /**
      * Field constructor
      * 
-     * @param \app\core\Model $model
+     * @param \sabosuke\sabophp_mvc_core\Model $model
      * @param string $attribute
      */
     public function __construct(Model $model, string $attribute){

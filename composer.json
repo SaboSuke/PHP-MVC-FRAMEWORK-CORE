@@ -6,5 +6,10 @@
             "email": "abedissam95@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "sabosuke\\sabophp_mvc_core": "./"
+        }
+    }
 }

@@ -1,14 +1,14 @@
 <?php
 /** User: Sabo */
 
-namespace app\core\form;
-use app\core\Model;
+namespace sabosuke\sabophp_mvc_core\form;
+use sabosuke\sabophp_mvc_core\Model;
 
 /** 
  * Class InputField
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core\form
+ * @package sabosuke\sabophp_mvc_core\form
 */
 
 class InputField extends BaseField{
@@ -24,7 +24,7 @@ class InputField extends BaseField{
     /**
      * InputField constructor
      * 
-     * @param \app\core\Model $model
+     * @param \sabosuke\sabophp_mvc_core\Model $model
      * @param string $attribute
      * @param string $placeholder
      */

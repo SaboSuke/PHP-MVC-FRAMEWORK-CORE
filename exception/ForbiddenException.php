@@ -1,15 +1,15 @@
 <?php
 /** User: Sabo */
 
-namespace app\core\exception;
-use app\core\Application;
+namespace sabosuke\sabophp_mvc_core\exception;
+use sabosuke\sabophp_mvc_core\Application;
 use \Exception;
 
 /** 
  * Class ForbiddenException
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core\exception
+ * @package sabosuke\sabophp_mvc_core\exception
 */
 
 class ForbiddenException extends \Exception{

@@ -1,13 +1,13 @@
 <?php
 /** User: Sabo */
 
-namespace app\core;
+namespace sabosuke\sabophp_mvc_core;
 
 /** 
  * Class Request
  * 
  * @author Essam Abed <abedissam95@gmail.com>
- * @package app\core
+ * @package sabosuke\sabophp_mvc_core
 */
 
 class Request{
