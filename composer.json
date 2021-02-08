@@ -1,0 +1,15 @@
+{
+    "name": "sabosuke/sabophp-mvc-core",
+    "authors": [
+        {
+            "name": "SaboSuke",
+            "email": "abedissam95@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "sabosuke\\sabophp_mvc_core\\": "./"
+        }
+    }
+}
