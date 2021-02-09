@@ -1,0 +1,15 @@
+{
+    "name": "sabosuke/bit-mvc-core",
+    "authors": [
+        {
+            "name": "SaboSuke",
+            "email": "abedissam95@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "sabosuke\\bit_mvc_core\\": "./"
+        }
+    }
+}
