@@ -28,7 +28,7 @@ class ThemeGenerator{
      */
     public static function generateThemeOptions(array $options): string{
         $attributes = array_values($options); //array_keys($options);
-        $map = array_map(fn($attr)  => "<li><a class=\"dropdown-item\" target=\"_self\" href=\"/changeTheme?name=$attr\">$attr</a></li>", $attributes);
+        $map = array_map(fn($attr)  => "<li><a class=\"dropdown-item\" target=\"_self\" href=\"/change-theme?name=$attr\">$attr</a></li>", $attributes);
         $map = implode('', $map); 
         return $map;
     }
