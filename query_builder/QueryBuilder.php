@@ -18,31 +18,33 @@ class QueryBuilder extends BaseQueryBuilder{
      * 
      */
     public function __construct(){
-        echo "this is a test";
+        
     }
 
-    public static function select(string $tableName, string $tableAlias = null, array $columns = []): string{
+    protected static function select(string $tableName, string $tableAlias = null, array $columns = []): string{
         if ($columns == [])
-            return "SELECT * FROM $tableName $tableAlias";
+            return "SELECT * FROM $tableName $tableAlias ";
         elseif ($columns !== []){   
             $map = implode(' ', array_map(fn($attr) =>"$attr,", $columns)); //attr1, attr2, attr3, 
-            $map = substr($columns, strlen($columns) - 2, strlen($columns)); //attr1, attr2, attr3
-            return "SELECT $map FROM $tableName $tableAlias";
+            $map = substr($map, strlen($map) - 2, strlen($map)); //attr1, attr2, attr3
+            return "SELECT $map FROM $tableName $tableAlias ";
         }
     }
 
-    public static function selectUsingFunction(
+    protected static function selectUsingFunction(
         string $tableName, 
-        string $columnName, 
+        string $columnName,
         string $function,
         string $tableAlias = null, 
         string $columnAlias = null
     ): string{
         if ($columnAlias != null)
-            return "SELECT $function($columnName) as $columnAlias FROM $tableName $tableAlias";
+            return "SELECT $function($columnName) as $columnAlias FROM $tableName $tableAlias ";
+        else
+            return "SELECT $function($columnName) FROM $tableName $tableAlias ";
     }
 
-    public static function insert(string $tableName, array $columns = [], array $values): string{
+    protected static function insert(string $tableName, array $columns = [], array $values): string{
         $values_map = implode('', array_map(fn($attr)=> "$attr,", $values));
         if ($columns == []){
             return "INSERT INTO $tableName VALUES($values_map)";
@@ -52,15 +54,16 @@ class QueryBuilder extends BaseQueryBuilder{
         }
     }
 
-    public static function update(string $tableName, array $columns, array $values): string{
+    protected static function update(string $tableName, array $columns, array $values): string{
         $columns_map = array_map(fn($attr)=> "$attr = ", $columns); //['id=', 'name=','last_name=']
         $values_map = array_map(fn($attr)=> "$attr, ", $values); //['1,' , 'essam, ','abed, ']
-        $map = implode($values_map, $columns_map); //id = 1, name = essam, last_name = abed
-        return "UPDATE $tableName SET $map";
+        $map = implode($values_map, $columns_map); //id = 1, name = essam, last_name = abed,
+        $map = substr($map, strlen($map) - 1); //id = 1, name = essam, last_name = abed
+        return "UPDATE $tableName SET $map ";
     }
     
-    public static function delete(string $tableName): string{
-        return "DELETE FROM $tableName";
+    protected static function delete(string $tableName): string{
+        return "DELETE FROM $tableName ";
     }
     
     /**
@@ -72,58 +75,58 @@ class QueryBuilder extends BaseQueryBuilder{
      * @return string
      */
     private static function join(string $tableName, string $tableAlias = null, string $condition): string{
-        return " JOIN $tableName $tableAlias ON $condition";
+        return " JOIN $tableName $tableAlias ON $condition ";
     }
 
-    public static function innerJoin(string $tableName, string $tableAlias = null, string $condition): string{
+    protected static function innerJoin(string $tableName, string $tableAlias = null, string $condition): string{
         return "INNER".static::join($tableName, $tableAlias , $condition);
     }
     
-    public static function leftJoin(string $tableName, string $tableAlias = null, string $condition): string{
+    protected static function leftJoin(string $tableName, string $tableAlias = null, string $condition): string{
         return "LEFT".static::join($tableName, $tableAlias , $condition);
     }
     
-    public static function rightJoin(string $tableName, string $tableAlias = null, string $condition): string{
+    protected static function rightJoin(string $tableName, string $tableAlias = null, string $condition): string{
         return "RIGHT".static::join($tableName, $tableAlias , $condition);
     }
     
-    public static function outerJoin(string $tableName, string $tableAlias = null, string $condition): string{
+    protected static function outerJoin(string $tableName, string $tableAlias = null, string $condition): string{
         return "OUTER".static::join($tableName, $tableAlias , $condition);
     }
 
-    public static function where(string $condition): string{
-        return "WHERE $condition";
-    }
-    
-    public static function andWhere(string $condition, string $selectStatement): string{
-        return "WHERE $condition($selectStatement)";
+    protected static function where(string $condition): string{
+        return "WHERE $condition ";
     }
 
-    public static function having(string $condition): string{
-        return "HAVING $condition";
+    protected static function andWhere(string $condition, string $selectStatement): string{
+        return "WHERE $condition($selectStatement) ";
+    }
+
+    protected static function having(string $condition): string{
+        return "HAVING $condition ";
     }
 
     private static function removeNotation($string, $position): string{
         return substr($string, $position, strlen($string)); //attr1, attr2, attr3
     }
 
-    public static function orderBy(mixed $columns, string $sortBy = "ASC"): string{
+    protected static function orderBy($columns, string $sortBy = "ASC"): string{
         if(!is_string($columns)){
             $columns = implode('', array_map(fn($attr)=> "$attr,", $columns)); //attr1,attr2,attr3,
             $columns = static::removeNotation($columns, strlen($columns)-1); //attr1,attr2,attr3
         }
-        return "ORDER BY $columns $sortBy"; 
+        return "ORDER BY $columns $sortBy ";
     }
 
-    public static function groupBy(string $column): string{
-        return "GROUP BY $column";
+    protected static function groupBy(string $column): string{
+        return "GROUP BY $column ";
     }
 
-    public static function getQuery(string $query): string{
+    protected static function getQuery(string $query): string{
         return $query.';';   
     }
 
-    public static function getResult(string $query): mixed{
+    protected static function getResult(string $query): array{
         $res = Application::$app->db->prepare($query);
         $res->execute();
         return $res->fetchAll(\PDO::FETCH_OBJ);

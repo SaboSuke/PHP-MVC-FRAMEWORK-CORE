@@ -35,7 +35,7 @@ abstract class BaseQueryBuilder{
      * @param array $columns
      * @return string
      */
-    abstract public static function select(string $tableName, string $tableAlias = null, array $columns = []): string;
+    abstract protected static function select(string $tableName, string $tableAlias = null, array $columns = []): string;
 
     /**
      * select data from the database using a specified function
@@ -48,7 +48,7 @@ abstract class BaseQueryBuilder{
      * @param string $columnAlias
      * @return string
      */
-    abstract public static function selectUsingFunction(
+    abstract protected static function selectUsingFunction(
         string $tableName, 
         string $columnName, 
         string $function,
@@ -64,7 +64,7 @@ abstract class BaseQueryBuilder{
      * @param array $values
      * @return string
      */
-    abstract public static function insert(string $tableName, array $columns = [], array $values): string;
+    abstract protected static function insert(string $tableName, array $columns = [], array $values): string;
 
     /**
      * updates an existing record in the database
@@ -74,7 +74,7 @@ abstract class BaseQueryBuilder{
      * @param array $values
      * @return string
      */
-    abstract public static function update(string $tableName, array $columns, array $values): string;
+    abstract protected static function update(string $tableName, array $columns, array $values): string;
     
     /**
      * deletes an existing record in the database
@@ -82,7 +82,7 @@ abstract class BaseQueryBuilder{
      * @param string $tableName
      * @return string
      */
-    abstract public static function delete(string $tableName): string;
+    abstract protected static function delete(string $tableName): string;
 
     /**
      * creates a condition on a select, delete, update function that you've 
@@ -92,7 +92,7 @@ abstract class BaseQueryBuilder{
      * @param string $condition
      * @return string
      */
-    abstract public static function where(string $condition): string;
+    abstract protected static function where(string $condition): string;
     
     /**
      * adds anther select statement inside of the where
@@ -105,7 +105,7 @@ abstract class BaseQueryBuilder{
      * @param string $condition
      * @return string
      */
-    abstract public static function andWhere(string $condition, string $selectStatement): string;
+    abstract protected static function andWhere(string $condition, string $selectStatement): string;
 
     /**
      * because the WHERE keyword could not be used with aggregate functions.
@@ -114,7 +114,7 @@ abstract class BaseQueryBuilder{
      * @param string $condition
      * @return string
      */
-    abstract public static function having(string $condition): string;
+    abstract protected static function having(string $condition): string;
 
     /**
      * sorts the result-set in ascending or descending order.
@@ -124,7 +124,7 @@ abstract class BaseQueryBuilder{
      * @param string $sortBy
      * @return string
      */
-    abstract public static function orderBy(mixed $columns, string $sortBy = "ASC"): string;
+    abstract protected static function orderBy(mixed $columns, string $sortBy = "ASC"): string;
 
     /**
      * statement groups rows that have the same values into summary rows, 
@@ -134,7 +134,7 @@ abstract class BaseQueryBuilder{
      * @param string $columnName
      * @return string
      */
-    abstract public static function groupBy(string $column): string;
+    abstract protected static function groupBy(string $column): string;
     
     /**
      * inner joins two tables on a specified condition
@@ -145,7 +145,7 @@ abstract class BaseQueryBuilder{
      * @param string $condition
      * @return string
      */
-    abstract public static function innerJoin(string $tableName, string $tableAlias = null, string $condition): string;
+    abstract protected static function innerJoin(string $tableName, string $tableAlias = null, string $condition): string;
     
     /**
      * left joins two tables on a specified condition
@@ -156,7 +156,7 @@ abstract class BaseQueryBuilder{
      * @param string $condition
      * @return string
      */
-    abstract public static function leftJoin(string $tableName, string $tableAlias = null, string $condition): string;
+    abstract protected static function leftJoin(string $tableName, string $tableAlias = null, string $condition): string;
     
     /**
      * right joins two tables on a specified condition
@@ -167,7 +167,7 @@ abstract class BaseQueryBuilder{
      * @param string $condition
      * @return string
      */
-    abstract public static function rightJoin(string $tableName, string $tableAlias = null, string $condition): string;
+    abstract protected static function rightJoin(string $tableName, string $tableAlias = null, string $condition): string;
     
     /**
      * outer or full joins two tables on a specified condition
@@ -178,7 +178,7 @@ abstract class BaseQueryBuilder{
      * @param string $condition
      * @return string
      */
-    abstract public static function outerJoin(string $tableName, string $tableAlias = null, string $condition): string;
+    abstract protected static function outerJoin(string $tableName, string $tableAlias = null, string $condition): string;
 
     /**
      * returns finishing the query using select where or any other
@@ -187,14 +187,13 @@ abstract class BaseQueryBuilder{
      * @param string $query
      * @return string
      */
-    abstract public static function getQuery(string $query): string;
+    abstract protected static function getQuery(string $query): string;
     
     /**
      * returns the result of a given query
      *
      * @param string $query
-     * @return mixed
+     * @return array
      */
-    abstract public static function getResult(string $query): mixed;
-
+    abstract protected static function getResult(string $query): array;
 }
