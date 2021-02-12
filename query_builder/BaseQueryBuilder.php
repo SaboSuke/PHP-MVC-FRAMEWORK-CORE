@@ -28,14 +28,14 @@ abstract class BaseQueryBuilder{
      * select data from the database based on the parameters you
      * can select all columns or specify the once you want to select
      * you can also create an alias for the table name so you can use it
-     * in the innerJoin or join function afterwards
+     * join tables afterwards
      * 
      * @param string $tableName
      * @param string $alias
      * @param array $columns
      * @return string
      */
-    abstract protected static function select(string $tableName, string $tableAlias = null, array $columns = []): string;
+    abstract protected static function select(string $tableName, ?string $tableAlias = null, ?array $columns = []): string;
 
     /**
      * select data from the database using a specified function
@@ -52,8 +52,8 @@ abstract class BaseQueryBuilder{
         string $tableName, 
         string $columnName, 
         string $function,
-        string $tableAlias = null, 
-        string $columnAlias = null
+        ?string $tableAlias = null, 
+        ?string $columnAlias = null
     ): string;
     
     /**
@@ -64,7 +64,7 @@ abstract class BaseQueryBuilder{
      * @param array $values
      * @return string
      */
-    abstract protected static function insert(string $tableName, array $columns = [], array $values): string;
+    abstract protected static function insert(string $tableName, ?array $columns = [], array $values): string;
 
     /**
      * updates an existing record in the database
@@ -124,7 +124,7 @@ abstract class BaseQueryBuilder{
      * @param string $sortBy
      * @return string
      */
-    abstract protected static function orderBy(mixed $columns, string $sortBy = "ASC"): string;
+    abstract protected static function orderBy($columns, ?string $sortBy = "ASC"): string;
 
     /**
      * statement groups rows that have the same values into summary rows, 
@@ -137,8 +137,29 @@ abstract class BaseQueryBuilder{
     abstract protected static function groupBy(string $column): string;
     
     /**
+     * joins two tables on a specified condition
+     * you can also create an alias for the table name
+     *
+     * @param string $tableName
+     * @param string $tableAlias
+     * @param string $condition
+     * @return string
+     */
+    abstract protected static function joinTableOn(string $tableName, ?string $tableAlias = null, string $condition): string;
+
+    /**
+     * join 2 tables knowing that they have the same column name 
+     * USING($columnName)
+     *
+     * @param string $tableName
+     * @param string $columnName
+     * @return string
+     */
+    abstract protected static function joinTableUsing(string $tableName, string $columnName): string;
+
+    /**
      * inner joins two tables on a specified condition
-     * you can also create an alias for the table name you want to join
+     * you can also create an alias for the table name
      *
      * @param string $tableName
      * @param string $alias
@@ -149,36 +170,36 @@ abstract class BaseQueryBuilder{
     
     /**
      * left joins two tables on a specified condition
-     * you can also create an alias for the table name you want to join
+     * you can also create an alias for the table name
      *
      * @param string $tableName
      * @param string $alias
      * @param string $condition
      * @return string
      */
-    abstract protected static function leftJoin(string $tableName, string $tableAlias = null, string $condition): string;
+    abstract protected static function leftJoin(string $tableName, ?string $tableAlias = null, string $condition): string;
     
     /**
      * right joins two tables on a specified condition
-     * you can also create an alias for the table name you want to join
+     * you can also create an alias for the table name
      *
      * @param string $tableName
      * @param string $alias
      * @param string $condition
      * @return string
      */
-    abstract protected static function rightJoin(string $tableName, string $tableAlias = null, string $condition): string;
+    abstract protected static function rightJoin(string $tableName, ?string $tableAlias = null, string $condition): string;
     
     /**
      * outer or full joins two tables on a specified condition
-     * you can also create an alias for the table name you want to join
+     * you can also create an alias for the table name
      *
      * @param string $tableName
      * @param string $alias
      * @param string $condition
      * @return string
      */
-    abstract protected static function outerJoin(string $tableName, string $tableAlias = null, string $condition): string;
+    abstract protected static function outerJoin(string $tableName, ?string $tableAlias = null, string $condition): string;
 
     /**
      * returns finishing the query using select where or any other
@@ -196,4 +217,5 @@ abstract class BaseQueryBuilder{
      * @return array
      */
     abstract protected static function getResult(string $query): array;
+    
 }
