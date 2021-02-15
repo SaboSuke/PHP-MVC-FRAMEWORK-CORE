@@ -17,6 +17,7 @@ use sabosuke\bit_mvc_core\error_handler\exception\BaseException;
 */
 
 class BaseBuilder{
+    
     protected array $generatedColumnNames = [];
 
     /**

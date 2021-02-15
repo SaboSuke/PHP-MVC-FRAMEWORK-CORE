@@ -86,7 +86,7 @@ class BaseException extends \Exception{
         if($trace[0]['class'] != '') {
             $result .= $trace[0]['class'] . '->';
         }
-        return $result . $trace[0]['function'] . '();<br />';
+        return $result . $trace[0]['function'] . '();';
     }
 
     public static $calls;

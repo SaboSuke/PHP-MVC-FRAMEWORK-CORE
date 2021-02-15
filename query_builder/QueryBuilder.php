@@ -15,7 +15,7 @@ use sabosuke\bit_mvc_core\error_handler\exception\BaseException;
  * @author Essam Abed <abedissam95@gmail.com>
  * @package sabosuke\bit_mvc_core\query_builder
 */
-//extends BaseBuilder
+
 class QueryBuilder extends BaseBuilder{
 
     private $query = null;
@@ -35,7 +35,6 @@ class QueryBuilder extends BaseBuilder{
         "\PDO::FETCH_GROUP",
         "\PDO::FETCH_COLUMN | \PDO::FETCH_GROUP", //group by column
     ];
-
     private $RESPONSE_MESSAGES = [
         "success" => [
             "select" => "Data Has Been Selected Successfully",
@@ -51,8 +50,12 @@ class QueryBuilder extends BaseBuilder{
         ],
         "error"=>[]
     ];
-
-    private array $action = [];
+    private array $action = [
+        'method' => '', 
+        'bindable' => false, 
+        'complete' => false,
+    ];
+    
     private $isBindable = false;
     private array $bindableParameters = [];
 
@@ -172,8 +175,7 @@ class QueryBuilder extends BaseBuilder{
             $columns = $this->generatedColumnNames;
         }
         $i = 0;
-        foreach($columns as $attribute) $this->bindableParameters[$attribute] = is_int($values[$i]) ? (int)$values[$i++] : $values[$i++];
-        var_dump($this->bindableParameters);
+        foreach($columns as $attribute) $this->bindableParameters[$attribute] = $values[$i];
     }
 
     /**
@@ -240,14 +242,14 @@ class QueryBuilder extends BaseBuilder{
         
         $map = trim(implode("", $a)); //id = 1, name = essam, last_name = abed,
         $map = self::removeNotation($map, strlen($map)-1); //id = 1, name = essam, last_name = abed
-
+        
         $this->query = $this->verifyQuery($this->subQuery = "UPDATE $tableName SET $map ");
         $this->action = [
             'method' => 'update', 
             'bindable' => $this->isBindable = true, 
             'complete' => false
         ];
-        
+
         return $this;
     }
 
@@ -264,7 +266,7 @@ class QueryBuilder extends BaseBuilder{
         $this->query = $this->verifyQuery($this->subQuery = " WHERE $condition ");
         $this->action["complete"] = true;
         
-        return new static();
+        return $this;
     }
 
     /**
@@ -278,18 +280,19 @@ class QueryBuilder extends BaseBuilder{
             try{
                 if($this->isBindable && $this->action['complete'] && !empty($this->query)){
                     $res = self::prepare($this->query);
-                    echo $this->query;
+                    
                     foreach($this->bindableParameters as $column => $value){
                         if(is_int($value))
                             $res->bindValue(":$column", $value, \PDO::PARAM_INT);
                         elseif(is_string($value))
                             $res->bindValue(":$column", $value, \PDO::PARAM_STR);
                     }
-                }elseif(!$this->action['complete']){
+                }
+                elseif(!$this->action['complete']){
                     $e = new QueryUnfinishedException();
                     $e->set_logger($e->generateExceptionErrorMessage($e, $e->getMessage()));
                     var_dump($e::$calls);
-                    exit();
+                    exit;
                 }else{
                     $res = self::prepare($this->query);
                 }

@@ -14,7 +14,7 @@ use \Exception;
 
 class QueryUnfinishedException extends BaseException{
 
-    protected $message = 'Your should finish the query before getting the result || ';
+    protected $message = 'You should finish the query before getting the result || ';
     protected $code = 404;
     public const ERROR = "QUERY_UNFINISHED";
     

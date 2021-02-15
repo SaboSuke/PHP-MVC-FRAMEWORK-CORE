@@ -43,6 +43,8 @@ class Application{
     public View $view;
     public QueryBuilder $qb;
 
+    public $query;
+
     /**
      * Application constructor
      * 
