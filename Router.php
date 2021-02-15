@@ -4,7 +4,9 @@
 namespace sabosuke\bit_mvc_core;
 use sabosuke\bit_mvc_core\Request;
 use sabosuke\bit_mvc_core\Response;
-use sabosuke\bit_mvc_core\exception\NotFoundException;
+
+use sabosuke\bit_mvc_core\error_handler\exception\PageNotFoundException;
+use sabosuke\bit_mvc_core\error_handler\ErrorHandler;
 
 /** 
  * Class Router
@@ -19,6 +21,8 @@ class Router{
     public Request $request;
     public Response $response;
     protected array $routes = [];
+    public array $prevException = [];
+    public int $prevIndex = 0;
 
     /**
      * Router constructor
@@ -44,7 +48,13 @@ class Router{
         $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
         if($callback === false){
-            throw new NotFoundException();
+            $error = new ErrorHandler();
+            if ($error->registerError())
+            throw new PageNotFoundException(
+                $this->prevException[$this->prevIndex++] = strval(
+                    $error->handleException(new PageNotFoundException())
+                )
+            );
         }
             
         if(is_string($callback)){

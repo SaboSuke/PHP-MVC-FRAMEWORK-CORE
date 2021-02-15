@@ -1,7 +1,0 @@
-CHANGELOG
-=========
-
-version
------
-
- * description

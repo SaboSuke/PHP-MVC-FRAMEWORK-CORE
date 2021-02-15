@@ -12,6 +12,7 @@ use sabosuke\bit_mvc_core\db\Database;
 use sabosuke\bit_mvc_core\View;
 
 use \sabosuke\bit_mvc_core\theme\ThemeModel;
+use \sabosuke\bit_mvc_core\query_builder\QueryBuilder;
 
 /** 
  * Class Application
@@ -40,6 +41,7 @@ class Application{
     public Database $db;
     public ?UserModel $user;
     public View $view;
+    public QueryBuilder $qb;
 
     /**
      * Application constructor
@@ -54,6 +56,8 @@ class Application{
         $this->session = new Session();
         $this->router = new Router($this->request, $this->response);
         $this->view = new View();
+
+        $this->qb = new QueryBuilder();
         
         $this->db = new Database($config['db']);
         

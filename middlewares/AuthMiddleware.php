@@ -4,7 +4,9 @@
 namespace sabosuke\bit_mvc_core\middlewares;
 
 use sabosuke\bit_mvc_core\Application;
-use sabosuke\bit_mvc_core\exception\ForbiddenException;
+use sabosuke\bit_mvc_core\error_handler\exception\ForbiddenException;
+use sabosuke\bit_mvc_core\error_handler\exception\BaseForbiddenException;
+use sabosuke\bit_mvc_core\error_handler\ErrorHandler;
 
 /** 
  * Class AuthMiddleware
@@ -16,6 +18,8 @@ use sabosuke\bit_mvc_core\exception\ForbiddenException;
 class AuthMiddleware extends BaseMiddleware{
 
     public array $actions;
+    public array $prevException = [];
+    public  int $prevIndex = 0;
     
     /**
      * AuthMiddleware constructor
@@ -28,7 +32,13 @@ class AuthMiddleware extends BaseMiddleware{
     public function execute(){
         if(Application::isGuest()){
             if(empty($this->actions) || in_array(Application::$app->controller->action, $this->actions)){
-                throw new ForbiddenException();
+                $error = new ErrorHandler();
+                $error->registerError();
+                throw new BaseForbiddenException(
+                    $this->prevException[$this->prevIndex++] = strval(
+                        $error->handleException(new BaseForbiddenException())
+                    )
+                );
             }
         }
     }
